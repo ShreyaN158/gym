@@ -110,3 +110,39 @@ res.status(500).json({
 }
 
 };
+
+exports.blockUser =
+async (req,res)=>{
+
+try{
+
+const user =
+await User.findByIdAndUpdate(
+
+ req.params.id,
+
+ {
+  isBlocked:true
+ },
+
+ {
+  new:true
+ }
+
+);
+
+res.json({
+ success:true,
+ user
+});
+
+}
+catch(error){
+
+res.status(500).json({
+ message:error.message
+});
+
+}
+
+};
